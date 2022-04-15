@@ -1,37 +1,62 @@
 import Vonage from '@vonage/server-sdk';
-import dotenv from 'dotenv/config';
-// Allows node to use fetch
+import 'dotenv/config';
 import fetch from 'node-fetch';
-// Imports pokedex array
 import { pokedex } from './pokedex.js';
-// Uses random number generator to select a pokemon from the array.
-// API restricted to search by name of Pokemon
-const searchValue = Math.round(Math.random() * 898);
-const pokemonName = pokedex[searchValue - 1].toLowerCase();
-// Drafts text message
-function makeText(name, type, ability) {
-	name = name[0].toUpperCase() + name.slice(1);
+// Selects a Pokemon from an Array in pokedex.js
+function selectPokemon() {
+	const searchValue = Math.round(Math.random() * 898);
+	return pokedex[searchValue - 1].toLowerCase();
+}
+//Selected Pokemon and checkpoint
+let chosenPokemon = selectPokemon();
+console.log(`Chosen Pokemon is ${chosenPokemon}`);
+
+// Creates a draft of the text message
+async function makeTextMessage([
+	type,
+	ability,
+	HP,
+	ATK,
+	DEF,
+	SPATK,
+	SPDEF,
+	SPEED,
+]) {
+	// Capitalizing the three arguments
 	type = type[0].toUpperCase() + type.slice(1);
 	ability = ability[0].toUpperCase() + ability.slice(1);
-	return `Today's Pokemon is ${name}, with the type of ${type}, whos primary ability is ${ability}`;
+	const response = `Guess that pokemon! 
+	> Main Type:${type} 
+	> Primary ability: ${ability}	
+	> Stats: HP: ${HP} ATK: ${ATK} DEF: ${DEF} SPATK: ${SPATK} SPDEF: ${SPDEF} SPEED: ${SPEED}`;
+	return response;
 }
-// Gets data from API
-async function contactAPI() {
-	console.log(pokemonName);
-	let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-	return fetch(url)
-		.then((response) => response.json())
-		.then((data) => {
-			console.log(data.species.name);
-			console.log(data.abilities[0].ability.name);
-			return {
-				name: data.species.name,
-				ability: data.abilities[0].ability.name,
-				type: data.types[0].type.name,
-			};
-		});
+// Fetches pokeapi using chosenPokemon on line 11
+// Bug: Promise is always pending and never resolved.
+// Bug solved 4/15
+async function contactAPI(chosenPokemon) {
+	const url = `https://pokeapi.co/api/v2/pokemon/${chosenPokemon}`;
+	try {
+		const response = await fetch(url);
+		const pokemonObject = await response.json();
+		const pokemonArray = [
+			pokemonObject.types[0].type.name,
+			pokemonObject.abilities[0].ability.name,
+			pokemonObject.stats[0].base_stat,
+			pokemonObject.stats[1].base_stat,
+			pokemonObject.stats[2].base_stat,
+			pokemonObject.stats[3].base_stat,
+			pokemonObject.stats[4].base_stat,
+			pokemonObject.stats[5].base_stat,
+		];
+		return await makeTextMessage(pokemonArray);
+	} catch (err) {
+		console.log('fetch failed', err);
+	}
 }
-// await console.log(contactAPI());
+
+const textMessage = await contactAPI(chosenPokemon);
+
 // Vonage API using environment variables
 const vonage = new Vonage({
 	apiKey: process.env.APIKEY,
@@ -39,12 +64,11 @@ const vonage = new Vonage({
 });
 
 // Sends SMS to phone number
-async function sendSMS() {
-	const textMessage = contactAPI();
-	console.log(textMessage);
-	// const from = '18776934395';
-	// const to = '14077387133';
-	// const text = `${pokemonText}`;
+async function sendSMS(textMessage) {
+	const from = '18776934395';
+	const to = '14077387133';
+	const text = await textMessage;
+	console.log(text);
 	// vonage.message.sendSms(from, to, text, (err, responseData) => {
 	// 	if (err) {
 	// 		console.log(err);
@@ -60,4 +84,4 @@ async function sendSMS() {
 	// });
 }
 
-sendSMS();
+await sendSMS(textMessage);
