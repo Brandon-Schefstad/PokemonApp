@@ -2,5 +2,24 @@
   "dependencies": {
     "@vonage/server-sdk": "^2.10.11",
     "dotenv": "^16.0.0"
-  }
+  },
+  "type":"module",
+  "name": "pokemonapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brandon-Schefstad/PokemonApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brandon-Schefstad/PokemonApp/issues"
+  },
+  "homepage": "https://github.com/Brandon-Schefstad/PokemonApp#readme",
+  "description": ""
 }
