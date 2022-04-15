@@ -1,4 +1,4 @@
-export const data = [
+export const pokedex = [
 	'Bulbasaur',
 	'Ivysaur',
 	'Venusaur',
