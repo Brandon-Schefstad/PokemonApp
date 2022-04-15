@@ -1,11 +1,17 @@
 import Vonage from '@vonage/server-sdk';
 import dotenv from 'dotenv/config';
+// Imports pokedex array
+import { data } from './pokedex.js';
+// Uses random number generator to select a pokemon from the array.
+// API restricted to search by name of Pokemon
+const searchValue = Math.round(Math.random() * 898);
+console.log(searchValue, data[searchValue]);
 
+// Vonage API using environment variables
 const vonage = new Vonage({
 	apiKey: process.env.API_KEY,
 	apiSecret: process.env.APISECRET,
 });
-
 function sendSMS() {
 	console.log(`sending SMS`);
 	const from = '18776934395';
