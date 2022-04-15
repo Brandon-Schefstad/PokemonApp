@@ -9,28 +9,29 @@ import { pokedex } from './pokedex.js';
 const searchValue = Math.round(Math.random() * 898);
 const pokemonName = pokedex[searchValue - 1].toLowerCase();
 // Drafts text message
-async function makeText(name, type, ability) {
+function makeText(name, type, ability) {
 	name = name[0].toUpperCase() + name.slice(1);
 	type = type[0].toUpperCase() + type.slice(1);
 	ability = ability[0].toUpperCase() + ability.slice(1);
-	return await `Today's Pokemon is ${name}, with the type of ${type}, whos primary ability is ${ability}`;
+	return `Today's Pokemon is ${name}, with the type of ${type}, whos primary ability is ${ability}`;
 }
 // Gets data from API
-function contactAPI() {
+async function contactAPI() {
+	console.log(pokemonName);
 	let url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-	fetch(url)
+	return fetch(url)
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data.species.name);
+			console.log(data.abilities[0].ability.name);
 			return {
 				name: data.species.name,
 				ability: data.abilities[0].ability.name,
 				type: data.types[0].type.name,
 			};
-		})
-		.then((res) => {
-			return makeText(res.name, res.type, res.ability);
 		});
 }
+// await console.log(contactAPI());
 // Vonage API using environment variables
 const vonage = new Vonage({
 	apiKey: process.env.APIKEY,
@@ -41,22 +42,22 @@ const vonage = new Vonage({
 async function sendSMS() {
 	const textMessage = contactAPI();
 	console.log(textMessage);
-	// 	const from = '18776934395';
-	// 	const to = '14077387133';
-	// 	// const text = `${pokemonText}`;
-	// 	vonage.message.sendSms(from, to, text, (err, responseData) => {
-	// 		if (err) {
-	// 			console.log(err);
+	// const from = '18776934395';
+	// const to = '14077387133';
+	// const text = `${pokemonText}`;
+	// vonage.message.sendSms(from, to, text, (err, responseData) => {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		if (responseData.messages[0]['status'] === '0') {
+	// 			console.log('Message sent successfully.');
 	// 		} else {
-	// 			if (responseData.messages[0]['status'] === '0') {
-	// 				console.log('Message sent successfully.');
-	// 			} else {
-	// 				console.log(
-	// 					`Message failed with error: ${responseData.messages[0]['error-text']}`
-	// 				);
-	// 			}
+	// 			console.log(
+	// 				`Message failed with error: ${responseData.messages[0]['error-text']}`
+	// 			);
 	// 		}
-	// 	});
+	// 	}
+	// });
 }
 
 sendSMS();
