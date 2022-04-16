@@ -1,19 +1,7 @@
-import Vonage from '@vonage/server-sdk';
-import 'dotenv/config';
-import fetch from 'node-fetch';
-import { pokedex } from './pokedex.js';
-
-function selectPokemon() {
-	const searchValue = Math.round(Math.random() * 898);
-	return pokedex[searchValue - 1].toLowerCase();
-}
-//Selected Pokemon and checkpoint
-let chosenPokemon = selectPokemon();
-console.log(`Chosen Pokemon is ${chosenPokemon}`);
-
-// Updates webhook with name of pokemon
-async function updateWebHook(data = {}) {
-	const url = 'https://webhook.site/2e5db1d4-b41c-41a7-8ba1-352b31dde0e9';
+// Updates webhook with name of selected pokemon
+// Bug, not updating webhook 04/15
+async function updateWebHook(data = { Name: chosenPokemon }) {
+	const url = `https://webhook.site/2e5db1d4-b41c-41a7-8ba1-352b31dde0e9?chosenPokemon=${chosenPokemon}`;
 	const response = await fetch(url, {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		mode: 'cors', // no-cors, *cors, same-origin
@@ -28,4 +16,40 @@ async function updateWebHook(data = {}) {
 	});
 	return response.json(); // parses JSON response into native JavaScript objects
 }
-await updateWebHook({ Name: chosenPokemon });
+const textMessage = await contactAPI(chosenPokemon);
+// Sends SMS to phone number
+async function sendSMS(textMessage) {
+	const from = '[number]';
+	const to = '[number]';
+	const text = await textMessage;
+	console.log(text);
+	// 	vonage.message.sendSms(from, to, text, (err, responseData) => {
+	// 		if (err) {
+	// 			console.log(err);
+	// 		} else {
+	// 			if (responseData.messages[0]['status'] === '0') {
+	// 				console.log('Message sent successfully.');
+	// 			} else {
+	// 				console.log(
+	// 					`Message failed with error: ${responseData.messages[0]['error-text']}`
+	// 				);
+	// 			}
+	// 		}
+	// 	});
+}
+
+// Checks user guess to database
+// Bug 04/15 not working correctly.
+async function checkPokemon() {
+	const url = `https://webhook.site/2e5db1d4-b41c-41a7-8ba1-352b31dde0e9?chosenPokemon=${chosenPokemon}`;
+	try {
+		const response = await fetch(url);
+		const textObject = await response.json();
+		console.log(textObject);
+		if (textObject.name === chosenPokemon) {
+			console.log('Youre a winner!');
+		}
+	} catch {
+		console.log('You lose!');
+	}
+}
