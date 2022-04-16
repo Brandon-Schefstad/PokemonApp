@@ -1,15 +1,16 @@
 import { pokedex } from './pokedex.js';
-
+var newPoke;
 document
 	.querySelector('.card__getPokemon')
 	.addEventListener('click', runProgram);
+
+document.querySelector('.card__submit').addEventListener('click', winner);
 
 //SELECT A POKEMON
 function selectPokemon() {
 	const searchValue = Math.round(Math.random() * 898);
 	return pokedex[searchValue - 1].toLowerCase();
 }
-let newPoke = selectPokemon();
 
 // FETCH FLAVORTEXT
 async function contactAPISpecies(newPoke) {
@@ -96,8 +97,23 @@ async function makePokeHint([
 }
 
 async function runProgram() {
-	const newPoke = selectPokemon();
+	newPoke = selectPokemon();
 	console.log(`Chosen Pokemon Is ${newPoke}`);
 	contactAPISpecies(newPoke);
 	contactAPI(newPoke);
+}
+async function winner() {
+	await checkAnswer(newPoke);
+}
+async function checkAnswer(newPoke) {
+	const userAnswer = document.querySelector('.card__input').value;
+	console.log(newPoke);
+	if (userAnswer == newPoke) {
+		alert(`Winner!`);
+	} else {
+		alert(
+			`Incorrect! Answer is ${(newPoke =
+				newPoke[0].toUpperCase() + newPoke.slice(1))}`
+		);
+	}
 }

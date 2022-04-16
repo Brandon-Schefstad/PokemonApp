@@ -10,6 +10,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-top: 2rem;
 }
 
 .buttons {
@@ -23,26 +24,26 @@
   padding-left: 0.8rem;
 }
 
-.card__submit {
-  margin-right: 1rem;
-}
-
 .card__input {
   text-align: center;
 }
 
 .flavorText {
-  width: 60%;
+  width: 70%;
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+}
+
+.card__submit {
+  margin-right: 1rem;
+  border-radius: 1rem;
 }
 
 .card__getPokemon {
   background-image: url("../img/generate.png");
   height: 2em;
   width: 6em;
-}
-
-.item3 {
-  color: blue;
+  border-radius: 1rem;
 }
 
 /* Box sizing rules */
@@ -146,6 +147,13 @@ body {
 
 .card__stats__list {
   list-style: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding-right: 1rem;
+  font-family: 'Oswald', sans-serif;
 }
 
 .card__stats__list__items {
@@ -153,9 +161,7 @@ body {
   border: 2px solid #fff;
   border-radius: 1em;
   margin-bottom: 1.5em;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 95%;
   text-align: center;
 }
 
