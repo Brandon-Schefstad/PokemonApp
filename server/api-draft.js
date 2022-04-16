@@ -2,20 +2,17 @@ import Vonage from '@vonage/server-sdk';
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import { pokedex } from './pokedex.js';
-
 //SELECT A POKEMON
 function selectPokemon() {
 	const searchValue = Math.round(Math.random() * 898);
 	return pokedex[searchValue - 1].toLowerCase();
 }
-let chosenPokemon = selectPokemon();
-console.log(`Chosen Pokemon is ${chosenPokemon}`);
+export let chosenPokemon = selectPokemon();
 
 // FETCH FLAVORTEXT
 async function contactAPISpecies(chosenPokemon) {
 	const url = `https://pokeapi.co/api/v2/pokemon-species/${chosenPokemon}`;
 	try {
-		console.log(url);
 		const response = await fetch(url);
 		const pokemonObject = await response.json();
 		return pokemonObject;
@@ -36,11 +33,10 @@ const adjustedfirstEnglishFlavorText = firstEnglishFlavorText.replace(
 	/[\r\n]+/gm,
 	' '
 );
-console.log(adjustedfirstEnglishFlavorText);
 // FETCH FIRST HALF OF pokemonArray
 // Bug: Promise is always pending and never resolved.
 // Bug solved 04/15, use awaits.
-async function contactAPI(chosenPokemon) {
+export async function contactAPI(chosenPokemon) {
 	const url = `https://pokeapi.co/api/v2/pokemon/${chosenPokemon}`;
 	try {
 		const response = await fetch(url);
@@ -77,11 +73,11 @@ async function makeTextMessage([
 	// Capitalizing the three arguments
 	type = type[0].toUpperCase() + type.slice(1);
 	ability = ability[0].toUpperCase() + ability.slice(1);
-	const response = `Guess that pokemon! 
+	const response = `Who's that pokemon! 
 	> Main Type: ${type} 
 	> Primary ability: ${ability}	
 	> Stats: HP: ${HP} ATK: ${ATK} DEF: ${DEF} SPATK: ${SPATK} SPDEF: ${SPDEF} SPEED: ${SPEED}
-	> Flavor Text: ${firstEnglishFlavorText.replaceAll('\n', '')}`;
+	> Pokedex Entry: ${firstEnglishFlavorText.replaceAll('\n', '')}`;
 	return response;
 }
 
@@ -91,9 +87,9 @@ const vonage = new Vonage({
 	apiSecret: process.env.APISECRET,
 });
 
-const textMessage = await contactAPI(chosenPokemon);
+export const textMessage = await contactAPI(chosenPokemon);
 // Sends SMS to phone number
-async function sendSMS(textMessage) {
+export async function sendSMS(textMessage) {
 	const from = '18776934395';
 	const to = '14077387133';
 	const text = await textMessage;
@@ -112,11 +108,3 @@ async function sendSMS(textMessage) {
 	// 		}
 	// 	});
 }
-
-async function runProgram() {
-	contactAPI(chosenPokemon);
-	// updateWebHook({ Name: chosenPokemon });
-	// checkPokemon(chosenPokemon);
-	sendSMS(textMessage);
-}
-await runProgram();

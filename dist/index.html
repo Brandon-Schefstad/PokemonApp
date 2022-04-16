@@ -3,21 +3,70 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="description" content="This is where your description goes" />
-		<link rel="stylesheet" href="./css/style.css" />
+		<meta
+			name="description"
+			content="This is where your description goes"
+		/>
+		<link rel="stylesheet" href="./css/main.css" />
 		<meta name="keywords" content="one, two, three" />
 
 		<title>Title in the tab</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css" />
-		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<button type="button" class="button" name="button">Get Text</button>
+		<div class="wrapper">
+			<div class="card">
+				<div class="card__header">
+					<h2 class="card__name">
+						Name:
+
+						<input
+							class="card__input"
+							type="text"
+							placeholder="Who's That Pokemon?"
+						/>
+					</h2>
+					<section class="buttons">
+						<button class="card__submit">Submit</button>
+						<button
+							type="button"
+							class="card__getPokemon"
+							name="button"
+						>
+							Get Pokemon
+						</button>
+					</section>
+				</div>
+
+				<div class="card__stats">
+					<ul class="card__stats__list">
+						<li class="card__stats__list__items item1">
+							Primary Type: Dark
+						</li>
+						<li class="card__stats__list__items item2">
+							Primary Ability: Bad-dreams
+						</li>
+						<li class="card__stats__list__items item3">HP: 70</li>
+						<li class="card__stats__list__items item4">ATK: 90</li>
+						<li class="card__stats__list__items item5">DEF: 90</li>
+						<li class="card__stats__list__items item6">
+							SP.ATK: 135
+						</li>
+						<li class="card__stats__list__items item7">
+							SP.DEF: 90
+						</li>
+						<li class="card__stats__list__items item8">
+							SPEED: 125
+						</li>
+					</ul>
+				</div>
+				<p class="flavorText"></p>
+			</div>
+		</div>
 
 		<img src="" alt="" />
 
-		<script type="module" src="/server/index.js"></script>
+		<script type="module" src="./js/main.js"></script>
 	</body>
 </html>
