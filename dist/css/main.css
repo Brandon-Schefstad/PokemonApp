@@ -11,6 +11,7 @@
       -ms-flex-align: center;
           align-items: center;
   padding-top: 2rem;
+  border-radius: 0.25rem;
 }
 
 .buttons {
@@ -143,6 +144,36 @@ body {
   margin: auto;
   margin-top: 3rem;
   font-size: 2rem;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+
+.card__stats {
+  position: relative;
+}
+
+.card--lose {
+  position: absolute;
+  grid-column: span 2;
+  margin-top: 4.2rem;
+  width: 80%;
+  background: #ffc5cd;
+  font-size: 3.1rem;
+  border-radius: 0.25em;
+  -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin-left: auto;
+  left: 10%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
 }
 
 .card__stats__list {

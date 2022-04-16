@@ -20,8 +20,30 @@ body {
 	margin: auto;
 	margin-top: 3rem;
 	font-size: 2rem;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 0.5rem;
 }
 .card__stats {
+	position: relative;
+}
+.card--lose {
+	position: absolute;
+	grid-column: span 2;
+	margin-top: 4.2rem;
+	width: 80%;
+	background: $light-pink;
+	font-size: 3.1rem;
+	border-radius: 0.25em;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+	text-align: center;
+	margin-left: auto;
+	left: 10%;
+}
+.hidden {
+	visibility: hidden;
+}
+.visible {
+	visibility: visible;
 }
 .card__stats__list {
 	list-style: none;

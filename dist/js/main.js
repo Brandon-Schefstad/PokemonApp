@@ -97,6 +97,7 @@ async function makePokeHint([
 }
 
 async function runProgram() {
+	document.querySelector('.card--lose').classList.add('hidden');
 	newPoke = selectPokemon();
 	console.log(`Chosen Pokemon Is ${newPoke}`);
 	contactAPISpecies(newPoke);
@@ -107,13 +108,19 @@ async function winner() {
 }
 async function checkAnswer(newPoke) {
 	const userAnswer = document.querySelector('.card__input').value;
+	console.log(userAnswer);
 	console.log(newPoke);
-	if (userAnswer == newPoke) {
-		alert(`Winner!`);
+	if (userAnswer.toLowerCase() === newPoke.toLowerCase()) {
+		document.querySelector('.card--lose').classList.remove('hidden');
+		document.querySelector(
+			'.card--lose'
+		).innerText = `Correct! Answer is ${(newPoke =
+			newPoke[0].toUpperCase() + newPoke.slice(1))}`;
 	} else {
-		alert(
-			`Incorrect! Answer is ${(newPoke =
-				newPoke[0].toUpperCase() + newPoke.slice(1))}`
-		);
+		document.querySelector('.card--lose').classList.remove('hidden');
+		document.querySelector(
+			'.card--lose'
+		).innerText = `Incorrect! Answer is ${(newPoke =
+			newPoke[0].toUpperCase() + newPoke.slice(1))}`;
 	}
 }
