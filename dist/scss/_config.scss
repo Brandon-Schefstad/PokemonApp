@@ -1,5 +1,9 @@
-$primary-color: #272727;
-$secondary-color: #ff652f;
+$dark-red: #8b3941;
+$dark-pink: #de83a4;
+$white: #fff;
+$light-pink: #ffc5cd;
+$medium-pink: #c55a62;
+$dark-gray: #6a6a6a;
 
 @mixin transition-ease {
 	transition: all 0.2s ease-in-out;

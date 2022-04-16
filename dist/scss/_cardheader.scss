@@ -1,20 +1,28 @@
 .card__header {
-	background: #c55a62;
+	background: $light-pink;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-// .buttons {
-// 	display: grid;
-// 	grid-template-columns: repeat(2, 1fr);
-// 	justify-content: space-around;
-// 	margin-top: 1rem;
-// 	padding-left: 0.8rem;
-// }
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-content: space-around;
+	margin-top: 1rem;
+	padding-left: 0.8rem;
+}
 
 .card__submit {
 	margin-right: 1rem;
 }
 .card__input {
 	text-align: center;
+}
+.flavorText {
+	width: 60%;
+}
+.card__getPokemon {
+	background-image: url('../img/generate.png');
+	height: 2em;
+	width: 6em;
 }

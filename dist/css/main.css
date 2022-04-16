@@ -1,3 +1,50 @@
+.card__header {
+  background: #ffc5cd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 1rem;
+  padding-left: 0.8rem;
+}
+
+.card__submit {
+  margin-right: 1rem;
+}
+
+.card__input {
+  text-align: center;
+}
+
+.flavorText {
+  width: 60%;
+}
+
+.card__getPokemon {
+  background-image: url("../img/generate.png");
+  height: 2em;
+  width: 6em;
+}
+
+.item3 {
+  color: blue;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -76,57 +123,6 @@ select {
   }
 }
 
-.home {
-  height: 100%;
-  padding-top: 40vh;
-  overflow: hidden;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
-  background: -webkit-gradient(linear, left top, right top, from(rgba(39, 39, 39, 0.9)), to(rgba(39, 39, 39, 0.3))), url("../img/model-1.jpg") center top;
-  background: linear-gradient(to right, rgba(39, 39, 39, 0.9), rgba(39, 39, 39, 0.3)), url("../img/model-1.jpg") center top;
-  background-size: cover;
-}
-
-.home__name {
-  font-size: 5rem;
-  padding-bottom: 1rem;
-  margin-top: 1rem;
-  border-bottom: 2px solid #fff;
-}
-
-.home__name--last {
-  color: #ff652f;
-  font-weight: 700;
-}
-
-.item3 {
-  color: blue;
-}
-
-.card__header {
-  background: #c55a62;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.card__submit {
-  margin-right: 1rem;
-}
-
-.card__input {
-  text-align: center;
-}
-
 body {
   background-image: linear-gradient(45deg, #ded5d5, #8b3941);
 }
@@ -139,7 +135,7 @@ body {
 }
 
 .card {
-  background-color: #0dff00;
+  background-color: #8b3941;
   padding-bottom: 1rem;
   width: 50%;
   min-width: 30em;
@@ -153,7 +149,8 @@ body {
 }
 
 .card__stats__list__items {
-  background: rgba(255, 0, 0, 0.5);
+  background: #de83a4;
+  border: 2px solid #fff;
   border-radius: 1em;
   margin-bottom: 1.5em;
   width: 60%;
