@@ -90,8 +90,9 @@ const vonage = new Vonage({
 export const textMessage = await contactAPI(chosenPokemon);
 // Sends SMS to phone number
 export async function sendSMS(textMessage) {
-	const from = '18776934395';
-	const to = '14077387133';
+	// Phone Number with Vonage
+	const from = '';
+	const to = '';
 	const text = await textMessage;
 	console.log(text);
 	// 	vonage.message.sendSms(from, to, text, (err, responseData) => {
