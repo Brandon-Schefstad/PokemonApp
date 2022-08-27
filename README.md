@@ -1,5 +1,3 @@
-!
-
 # My Awesome Project
 
 Pulls from PokeAPI and displays information onto the interface. User input is checked against the name of the pokemon and displays a correct/incorrect response.
