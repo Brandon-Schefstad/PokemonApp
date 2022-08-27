@@ -8,7 +8,7 @@ Pulls from PokeAPI and displays information onto the interface. User input is ch
 
 ## Live Site
 
-## [Who's That Pokemon?](https://brandon-schefstad-pokemon.netlify.app/)
+[Who's That Pokemon?](https://brandon-schefstad-pokemon.netlify.app/)
 
 ## How It's Made:
 
